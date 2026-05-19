@@ -4,12 +4,13 @@ string animalAge = "";
 string animalPhysicalDescription = "";
 string animalPersonalityDescription = "";
 string animalNickname = "";
+string suggestedDonation = "";
 
 int maxPets = 8;
 string? readResult;
 string menuSelection = "";
 
-string[,] ourAnimals = new string[maxPets, 6];
+string[,] ourAnimals = new string[maxPets, 7];
 
 // create sample data ourAnimals array entries
 for (int i = 0; i < maxPets; i++)
@@ -17,25 +18,44 @@ for (int i = 0; i < maxPets; i++)
     switch (i)
     {
         case 0:
-            animalSpecies = "dog";
             animalID = "d1";
+            animalSpecies = "dog";
             animalAge = "2";
             animalPhysicalDescription = "medium sized cream colored female golden retriever weighing about 45 pounds. housebroken.";
             animalPersonalityDescription = "loves to have her belly rubbed and likes to chase her tail. gives lots of kisses.";
             animalNickname = "lola";
+            suggestedDonation = "85.00";
             break;
 
         case 1:
-            animalSpecies = "dog";
             animalID = "d2";
+            animalSpecies = "dog";
             animalAge = "9";
             animalPhysicalDescription = "large reddish-brown male golden retriever weighing about 85 pounds. housebroken.";
             animalPersonalityDescription = "loves to have his ears rubbed when he greets you at the door, or at any time! loves to lean-in and give doggy hugs.";
             animalNickname = "gus";
+            suggestedDonation = "49.99";
             break;
 
-        // case 2: deleted for brevity
-        // case 3: deleted for brevity
+        case 2:
+            animalID = "c3";
+            animalSpecies = "cat";
+            animalAge = "1";
+            animalNickname = "snow";
+            animalPhysicalDescription = "small white female weighing about 8 pounds. litter box trained.";
+            animalPersonalityDescription = "friendly";
+            suggestedDonation = "40.00";
+            break;
+
+        case 3:
+            animalID = "c4";
+            animalSpecies = "cat";
+            animalAge = "";
+            animalNickname = "lion";
+            animalPhysicalDescription = "";
+            animalPersonalityDescription = "";
+            suggestedDonation = "45.00";
+            break;
 
         default:
             animalSpecies = "";
@@ -44,6 +64,7 @@ for (int i = 0; i < maxPets; i++)
             animalPhysicalDescription = "";
             animalPersonalityDescription = "";
             animalNickname = "";
+            suggestedDonation = "";
             break;
     }
     ourAnimals[i, 0] = "ID #: " + animalID;
@@ -52,6 +73,9 @@ for (int i = 0; i < maxPets; i++)
     ourAnimals[i, 3] = "Nickname: " + animalNickname;
     ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
     ourAnimals[i, 5] = "Personality: " + animalPersonalityDescription;
+    decimal decimalDonation;
+    if (!decimal.TryParse(suggestedDonation, out decimalDonation)) decimalDonation = 45.00m;
+    ourAnimals[i, 6] = $"Suggested Donation: {decimalDonation:C2}";
 };
 
 do
@@ -77,10 +101,11 @@ do
             {
                 if (ourAnimals[i, 0] != "ID #: ")
                 {
-                    for (int j = 0; j < 6; j++)
+                    for (int j = 0; j < 7; j++)
                     {
                         Console.WriteLine(ourAnimals[i, j]);
                     }
+                    Console.WriteLine("\n");
                 }
             }
             Console.WriteLine("\n\rPress the Enter key to continue");
