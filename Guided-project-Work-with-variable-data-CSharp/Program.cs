@@ -12,7 +12,6 @@ string menuSelection = "";
 
 string[,] ourAnimals = new string[maxPets, 7];
 
-// create sample data ourAnimals array entries
 for (int i = 0; i < maxPets; i++)
 {
     switch (i)
@@ -112,15 +111,46 @@ do
             readResult = Console.ReadLine();
             break;
         case "2":
-            Console.WriteLine("\nUNDER CONSTRUCTION - please check back next month to see progress");
-            Console.WriteLine("\n\rPress the Enter key to continue");
+            string dogDescription = "";
+            bool noMatchesDog = true;
+            string dogCharacteristic = "";
+
+            while (dogCharacteristic == "")
+            {
+                Console.WriteLine($"\nEnter one desired dog characteristics to search for");
+                readResult = Console.ReadLine();
+                if (readResult != null)
+                {
+                    dogCharacteristic = readResult.ToLower().Trim();
+                }
+            }
+
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 1].Contains("dog"))
+                {
+                    dogCharacteristic = ourAnimals[i, 4] + "\n" + ourAnimals[i, 5];
+                    if (dogCharacteristic.Contains(dogDescription))
+                    {
+                        Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
+                        Console.WriteLine(dogDescription);
+                        noMatchesDog = false;
+                    }
+                }
+            }
+
+            if (noMatchesDog)
+            {
+                Console.WriteLine("None of our dogs are a match found for: " + dogCharacteristic);
+
+            }
+            Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
 
         default:
             break;
     }
-
 
 }
 while (menuSelection != "exit");
